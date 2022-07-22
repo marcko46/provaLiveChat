@@ -12,320 +12,320 @@
 	</head>
 	
 	<body>
-		<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
-		<script type='text/javascript'>
-		    var initESW = function(gslbBaseURL) {
-			embedded_svc.settings.displayHelpButton = true; //Or false
-			embedded_svc.settings.language = 'it'; //For example, enter 'en' or 'en-US'
+		<script type="text/javascript"><script type="text/javascript" src="https://service.force.com/embeddedservice/5.0/esw.min.js"></script>
+    var initESW = function(gslbBaseURL) {
+        embedded_svc.settings.displayHelpButton = true; //Or false
+        embedded_svc.settings.language = 'it'; //For example, enter 'en' or 'en-US'
+        
+        embedded_svc.settings.defaultMinimizedText = 'SOS Aziende'; //(Defaults to Chat with an Expert)
+        embedded_svc.settings.disabledMinimizedText = 'Fuori orario servizio'; //(Defaults to Agent Offline)
 
-			embedded_svc.settings.defaultMinimizedText = 'SOS Aziende'; //(Defaults to Chat with an Expert)
-			embedded_svc.settings.disabledMinimizedText = 'Fuori orario servizio'; //(Defaults to Agent Offline)
+        // Settings for Chat
+        embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
+            if (prechatFormData[2].value === "CIG in deroga")
+                return "57309000000c8UdAAI";
+            if (prechatFormData[2].value === "CIG ordinaria o straordinaria")
+                return "57309000000c8UiAAI";
+            if (prechatFormData[2].value === "Fondo integrazione salariale o fondi di solidarietà")
+                return "57309000000c8UsAAI";
+            if (prechatFormData[2].value === "Altro")
+                return "57309000000c8UxAAI"; 
+        }
 
-			// Settings for Chat
-			embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
-			    if (prechatFormData[2].value === "CIG in deroga")
-				return "57309000000c8UdAAI";
-			    if (prechatFormData[2].value === "CIG ordinaria o straordinaria")
-				return "57309000000c8UiAAI";
-			    if (prechatFormData[2].value === "Fondo integrazione salariale o fondi di solidarietà")
-				return "57309000000c8UsAAI";
-			    if (prechatFormData[2].value === "Altro")
-				return "57309000000c8UxAAI"; 
-			}
+        embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+        embedded_svc.settings.entryFeature = 'LiveAgent';
 
-			embedded_svc.settings.enabledFeatures = ['LiveAgent'];
-			embedded_svc.settings.entryFeature = 'LiveAgent';
+        embedded_svc.init(
+            'https://inps--dev2.sandbox.my.salesforce.com',
+            'https://inps--dev2.sandbox.my.site.com/inpscig',
+            gslbBaseURL,
+            '00D1w0000000aHH',
+            'CIG_Aziende',
+            {
+                baseLiveAgentContentURL: 'https://c.la1-c1cs-fra.salesforceliveagent.com/content',
+                deploymentId: '57209000000c7eu',
+                buttonId: '5731w00000001QB',
+                baseLiveAgentURL: 'https://d.la1-c1cs-fra.salesforceliveagent.com/chat',
+                eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I1w0000008P3pEAE_181c99bbcd5',
+                isOfflineSupportEnabled: false
+            }
+        );
+    
+        embedded_svc.settings.extraPrechatFormDetails = [  
+            {
+            "label": "chatRT",
+            "value": "0121w0000002e5vAAA",
+            "transcriptFields":[ "RecordTypeId" ],
+            "displayToAgent": false 
+            },
+            {
+            "label":"Enc_LastName",
+            "value" : "5oZzL2+Z/n9wbNdIOWLBJw==", //@ -> Inserire Variabile contenente il Cognome criptato dell'utente
+            "displayToAgent": false
+            },
+            {
+            "label":"Enc_CF",
+            "value" : "gE8gcCy6ORjzG+2ItU1jGrGgAXWcu9yNlHlyI9ijLxE=", //@ -> Inserire Variabile contenente il CF criptato dell'utente
+            "displayToAgent": false
+            },
+            {
+            "label": "Enc_Phone",
+            "value": "mNgbVp7/AHsXugzT8ihByw==", //@ -> Inserire Variabile contenente il Phone criptato dell'utente
+            "displayToAgent": false
+            },
+            {
+            "label": "Enc_Email",
+            "value":"JZW7Vc9I8PDTK+OqaUMwPFDPqD1gHXcSwaKYgjD/fJg=", //@ -> Inserire Variabile contenente l'email criptata dell'utente
+            "displayToAgent": false
+            },
+            {
+            "label": "Enc_Pec",
+            "value":"bHDsRAxZEx0CeA0NSZnHX8FfNYIRdSJFjoPyXGPfxno=", //@ -> Inserire Variabile contenente la pec criptata dell'utente
+            "displayToAgent": false
+            },
+            {
+            "label": "Enc_Mobile",
+            "value":"7Cn9Grv91kW2YOrLAGZepg==", //@ -> Inserire Variabile contenente il mobilephone criptato dell'utente
+            "displayToAgent": false
+            },
+            {
+            "label": "Enc_CodEnte",
+            "value": "yLACkU3k6UssdKzRRAke0g==", //@ -> Inserire Variabile contenente il codice ente criptato dell'utente
+            "displayToAgent": false 
+            },
+            {
+            "label": "Enc_DescEnte",
+            "value": "ukdbZi0L06P/wIo3WOgFrA==", //@ -> Inserire Variabile contenente la descrizione ente criptata dell'utente
+            "displayToAgent": false 
+            },
+            {
+            "label": "Enc_Matricola",
+            "value": "+zWXJ2CdGb9Z0GhHqHWcCQ==", //@ -> Inserire Variabile coontenente la matricola criptata dell'utente
+            "displayToAgent": false 
+            },
+            {
+            "label": "Enc_FiscalCodeEnte",
+            "value": "G+LFhfcQOfpLCox9H80cnA==", //@ -> Inserire Variabile contenente il codice fiscale ente criptato dell'utente
+            "displayToAgent": false 
+            },
+            {
+            "label": "Enc_Role",
+            "value": "nsPFJdJVQCEgXcz/dyOIPPEC7h+GV/AqbdvFGWaxeFpvYnby0PjDOH75FH6MYfQSYTftKhBu+xOmYeer0AWudw==", //@ -> Inserire Variabile contenente il ruolo criptato dell'utente
+            "displayToAgent": false 
+            },
+            {
+            "label": "CaseStatus",
+            "value": "Open",
+            "displayToAgent": false 
+            },
+            {
+            "label": "CaseOrigin",
+            "value": "Chat",
+            "displayToAgent": false 
+            },
+            {
+            "label": "CaseRespChannel",
+            "value": "Live Chat",
+            "displayToAgent": false 
+            },
+            {
+            "label": "CaseTematica",
+            "value": "Cassa Integrazione",
+            "displayToAgent": true 
+            },
+            
+            {
+            "label": "TaskType",
+            "value": "Live Chat",
+            "displayToAgent": false 
+            },
+            {
+            "label": "TaskSubject",
+            "value": "Live Chat",
+            "displayToAgent": false 
+            },
+            {
+            "label": "isFakeContact",
+            "value": true,
+            "displayToAgent": false 
+            }
+            
+        ];
+        
+        embedded_svc.settings.extraPrechatInfo = [
+            
+            //CONTACT
+            {
+                "entityName": "Contact",
+                "saveToTranscript": "ContactId",
+                "entityFieldMaps": [
+                               
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"LastName",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"Cognome"
+                    },
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"FirstName",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"Nome"
+                    },
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"INPS_Encrypted_FirstName__c",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"Enc_FirstName"
+                    },
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"INPS_Encrypted_LastName__c",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"Enc_LastName"
+                    },
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"INPS_Encrypted_Fiscal_Code__c",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"Enc_CF"
+                    },
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"INPS_Encrypted_Email__c",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"Enc_Email"
+                    },
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"INPS_Encrypted_Phone__c",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"Enc_Phone"
+                    },
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"INPS_Encrypted_PEC__c",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"Enc_Pec"
+                    },
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"INPS_Encrypted_Mobile__c",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"Enc_Mobile"
+                    },
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"INPS_Encrypted_Codice_Ente__c",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"Enc_CodEnte"
+                    },
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"INPS_Encrypted_Descrizione_Ente__c",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"Enc_DescEnte"
+                    },
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"INPS_Encrypted_Matricola__c",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"Enc_Matricola"
+                    },
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"INPS_Encrypted_Codice_Fiscale_Ente__c",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"Enc_FiscalCodeEnte"
+                    },
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"INPS_Encrypted_Role__c",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"Enc_Role"
+                    },
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"isFakeContact__c",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"isFakeContact"
+                    }
+                ]
+            },
+            
+            
+            //CASE
+            {
+                "entityName": "Case",
+                "saveToTranscript": "CaseId",
+                "entityFieldMaps": [
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"Status",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"CaseStatus"    
+                    },
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"Origin",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"CaseOrigin"    
+                    },
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"Response_Channel__c",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"CaseRespChannel"   
+                    },
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"Problem_Type__c",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"CaseTematica"   
+                    }
+                ]
+            },      
+            
+        ];
 
-			embedded_svc.init(
-			    'https://inps--dev2.sandbox.my.salesforce.com',
-			    'https://inps--dev2.sandbox.my.site.com/inpscig',
-			    gslbBaseURL,
-			    '00D1w0000000aHH',
-			    'CIG_Aziende',
-			    {
-				baseLiveAgentContentURL: 'https://c.la1-c1cs-fra.salesforceliveagent.com/content',
-				deploymentId: '57209000000c7eu',
-				buttonId: '5731w00000001QB',
-				baseLiveAgentURL: 'https://d.la1-c1cs-fra.salesforceliveagent.com/chat',
-				eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I1w0000008P3pEAE_181c99bbcd5',
-				isOfflineSupportEnabled: false
-			    }
-			);
-
-			embedded_svc.settings.extraPrechatFormDetails = [  
-			    {
-			    "label": "chatRT",
-			    "value": "0121w0000002e5vAAA",
-			    "transcriptFields":[ "RecordTypeId" ],
-			    "displayToAgent": false 
-			    },
-			    {
-			    "label":"Enc_LastName",
-			    "value" : "5oZzL2+Z/n9wbNdIOWLBJw==", //@ -> Inserire Variabile contenente il Cognome criptato dell'utente
-			    "displayToAgent": false
-			    },
-			    {
-			    "label":"Enc_CF",
-			    "value" : "gE8gcCy6ORjzG+2ItU1jGrGgAXWcu9yNlHlyI9ijLxE=", //@ -> Inserire Variabile contenente il CF criptato dell'utente
-			    "displayToAgent": false
-			    },
-			    {
-			    "label": "Enc_Phone",
-			    "value": "", //@ -> Inserire Variabile contenente il Phone criptato dell'utente
-			    "displayToAgent": false
-			    },
-			    {
-			    "label": "Enc_Email",
-			    "value":"JZW7Vc9I8PDTK+OqaUMwPFDPqD1gHXcSwaKYgjD/fJg=", //@ -> Inserire Variabile contenente l'email criptata dell'utente
-			    "displayToAgent": false
-			    },
-			    {
-			    "label": "Enc_Pec",
-			    "value":"bHDsRAxZEx0CeA0NSZnHX8FfNYIRdSJFjoPyXGPfxno=", //@ -> Inserire Variabile contenente la pec criptata dell'utente
-			    "displayToAgent": false
-			    },
-			    {
-			    "label": "Enc_Mobile",
-			    "value":"7Cn9Grv91kW2YOrLAGZepg==", //@ -> Inserire Variabile contenente il mobilephone criptato dell'utente
-			    "displayToAgent": false
-			    },
-			    {
-			    "label": "Enc_CodEnte",
-			    "value": "IHA+w2nqIxS+odOlA0Tjog==", //@ -> Inserire Variabile contenente il codice ente criptato dell'utente
-			    "displayToAgent": false 
-			    },
-			    {
-			    "label": "Enc_DescEnte",
-			    "value": "SjZTljCFod0k4N5Y9XuW2A==", //@ -> Inserire Variabile contenente la descrizione ente criptata dell'utente
-			    "displayToAgent": false 
-			    },
-			    {
-			    "label": "Enc_Matricola",
-			    "value": "yLACkU3k6UssdKzRRAke0g==", //@ -> Inserire Variabile contenente la matricola criptata dell'utente
-			    "displayToAgent": false 
-			    },
-			    {
-			    "label": "Enc_FiscalCodeEnte",
-			    "value": "G+LFhfcQOfpLCox9H80cnA==", //@ -> Inserire Variabile contenente il codice fiscale ente criptato dell'utente
-			    "displayToAgent": false 
-			    },
-			    {
-			    "label": "Enc_Role",
-			    "value": "gR2iTdPbwPpL3yIkKVR7aA==", //@ -> Inserire Variabile contenente il ruolo criptato dell'utente
-			    "displayToAgent": false 
-			    },
-			    {
-			    "label": "CaseStatus",
-			    "value": "Open",
-			    "displayToAgent": false 
-			    },
-			    {
-			    "label": "CaseOrigin",
-			    "value": "Chat",
-			    "displayToAgent": false 
-			    },
-			    {
-			    "label": "CaseRespChannel",
-			    "value": "Live Chat",
-			    "displayToAgent": false 
-			    },
-			    {
-			    "label": "CaseTematica",
-			    "value": "Cassa Integrazione",
-			    "displayToAgent": true 
-			    },
-
-			    {
-			    "label": "TaskType",
-			    "value": "Live Chat",
-			    "displayToAgent": false 
-			    },
-			    {
-			    "label": "TaskSubject",
-			    "value": "Live Chat",
-			    "displayToAgent": false 
-			    },
-			    {
-			    "label": "isFakeContact",
-			    "value": true,
-			    "displayToAgent": false 
-			    }
-
-			];
-
-			embedded_svc.settings.extraPrechatInfo = [
-
-			    //CONTACT
-			    {
-				"entityName": "Contact",
-				"saveToTranscript": "ContactId",
-				"entityFieldMaps": [
-
-				    {
-					"isExactMatch":false,
-					"fieldName":"LastName",
-					"doCreate":true,
-					"doFind":false,
-					"label":"Cognome"
-				    },
-				    {
-					"isExactMatch":false,
-					"fieldName":"FirstName",
-					"doCreate":true,
-					"doFind":false,
-					"label":"Nome"
-				    },
-				    {
-					"isExactMatch":false,
-					"fieldName":"INPS_Encrypted_FirstName__c",
-					"doCreate":true,
-					"doFind":false,
-					"label":"Enc_FirstName"
-				    },
-				    {
-					"isExactMatch":false,
-					"fieldName":"INPS_Encrypted_LastName__c",
-					"doCreate":true,
-					"doFind":false,
-					"label":"Enc_LastName"
-				    },
-				    {
-					"isExactMatch":false,
-					"fieldName":"INPS_Encrypted_Fiscal_Code__c",
-					"doCreate":true,
-					"doFind":false,
-					"label":"Enc_CF"
-				    },
-				    {
-					"isExactMatch":false,
-					"fieldName":"INPS_Encrypted_Email__c",
-					"doCreate":true,
-					"doFind":false,
-					"label":"Enc_Email"
-				    },
-				    {
-					"isExactMatch":false,
-					"fieldName":"INPS_Encrypted_Phone__c",
-					"doCreate":true,
-					"doFind":false,
-					"label":"Enc_Phone"
-				    },
-				    {
-					"isExactMatch":false,
-					"fieldName":"INPS_Encrypted_PEC__c",
-					"doCreate":true,
-					"doFind":false,
-					"label":"Enc_Pec"
-				    },
-				    {
-					"isExactMatch":false,
-					"fieldName":"INPS_Encrypted_Mobile__c",
-					"doCreate":true,
-					"doFind":false,
-					"label":"Enc_Mobile"
-				    },
-				    {
-					"isExactMatch":false,
-					"fieldName":"INPS_Encrypted_Codice_Ente__c",
-					"doCreate":true,
-					"doFind":false,
-					"label":"Enc_CodEnte"
-				    },
-				    {
-					"isExactMatch":false,
-					"fieldName":"INPS_Encrypted_Descrizione_Ente__c",
-					"doCreate":true,
-					"doFind":false,
-					"label":"Enc_DescEnte"
-				    },
-				    {
-					"isExactMatch":false,
-					"fieldName":"INPS_Encrypted_Matricola__c",
-					"doCreate":true,
-					"doFind":false,
-					"label":"Enc_Matricola"
-				    },
-				    {
-					"isExactMatch":false,
-					"fieldName":"INPS_Encrypted_Codice_Fiscale_Ente__c",
-					"doCreate":true,
-					"doFind":false,
-					"label":"Enc_FiscalCodeEnte"
-				    },
-				    {
-					"isExactMatch":false,
-					"fieldName":"INPS_Encrypted_Role__c",
-					"doCreate":true,
-					"doFind":false,
-					"label":"Enc_Role"
-				    },
-				    {
-					"isExactMatch":false,
-					"fieldName":"isFakeContact__c",
-					"doCreate":true,
-					"doFind":false,
-					"label":"isFakeContact"
-				    }
-				]
-			    },
+        embedded_svc.settings.prepopulatedPrechatFields = {
+            FirstName: "Mario",                                 //@ -> Inserire Variabile contenente il Nome dell'utente
+            LastName: "Utente",
+            Matricola_azienda__c: "+zWXJ2CdGb9Z0GhHqHWcCQ==",   //@ -> Inserire Variabile contenente la matricola azienda criptata
+        };
+   
+    };
 
 
-			    //CASE
-			    {
-				"entityName": "Case",
-				"saveToTranscript": "CaseId",
-				"entityFieldMaps": [
-				    {
-					"isExactMatch":false,
-					"fieldName":"Status",
-					"doCreate":true,
-					"doFind":false,
-					"label":"CaseStatus"    
-				    },
-				    {
-					"isExactMatch":false,
-					"fieldName":"Origin",
-					"doCreate":true,
-					"doFind":false,
-					"label":"CaseOrigin"    
-				    },
-				    {
-					"isExactMatch":false,
-					"fieldName":"Response_Channel__c",
-					"doCreate":true,
-					"doFind":false,
-					"label":"CaseRespChannel"   
-				    },
-				    {
-					"isExactMatch":false,
-					"fieldName":"Problem_Type__c",
-					"doCreate":true,
-					"doFind":false,
-					"label":"CaseTematica"   
-				    }
-				]
-			    },      
-
-			];
-
-			embedded_svc.settings.prepopulatedPrechatFields = {
-			    FirstName: "Mario",                                 //@ -> Inserire Variabile contenente il Nome dell'utente
-			    LastName: "Utente",
-			    Matricola_azienda__c: 'yLACkU3k6UssdKzRRAke0g==',   //@ -> Inserire Variabile contenente la matricola azienda criptata
-			};
-
-		    };
-
-		    if (!window.embedded_svc) {
-			var s = document.createElement('script');
-			s.setAttribute('src', 'https://inps--dev2.sandbox.my.salesforce.com/embeddedservice/5.0/esw.min.js');
-			s.onload = function() {
-			    initESW(null);
-			};
-			document.body.appendChild(s);
-		    } else {
-			initESW('https://service.force.com');
-		    }
-		</script>
+    if (!window.embedded_svc) {
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://inps--dev2.sandbox.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+        s.onload = function() {
+            initESW(null);
+        };
+        document.body.appendChild(s);
+    } else {
+        initESW('https://service.force.com');
+    }
+</script>
 	</body>
 </html>
